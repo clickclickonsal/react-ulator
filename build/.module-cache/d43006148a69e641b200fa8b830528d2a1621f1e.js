@@ -15,55 +15,14 @@ var Calculator = React.createClass({displayName: "Calculator",
 				'X','-','+',
 				'='
 			],
-			outputscreen: 0,
-			lastoutput: 0,
-			currentoperator: '',
+			outputscreen: 0
 		}
 	},
 	opKeyClick:function(key){
 		console.log(key)
-		if( key === 'C'){	
-			this.setState({outputscreen: 0, currentoperator:''})
-		}
-		else {
-			this.setState({currentoperator:key})
-		}
 	},
 	keyClick: function(key){
-		// console.log(key);
-		if(this.state.outputscreen !== 0 && this.state.currentoperator === '%'){
-			console.log("hi")
-			var output = this.state.outputscreen % key
-			this.setState({outputscreen:output})
-		}
-		else if(this.state.outputscreen !== 0 && this.state.currentoperator === '/'){
-			var output = this.state.outputscreen / key
-			this.setState({outputscreen:output})
-		}
-		else if(this.state.outputscreen !== 0 && this.state.currentoperator === 'X'){
-			var output = this.state.outputscreen * key
-			this.setState({outputscreen:output})
-		}
-		else if(this.state.outputscreen !== 0 && this.state.currentoperator === '+'){
-			var output = this.state.outputscreen + parseInt(key)
-			this.setState({outputscreen:output})
-		}
-		else if(this.state.outputscreen !== 0 && this.state.currentoperator === '-'){
-			var output = this.state.outputscreen - key
-			this.setState({outputscreen:output})
-		}
-		else{
-			if(this.state.outputscreen === 0){
-				this.setState({outputscreen:key})
-			}
-			else {
-				var newKey = this.state.outputscreen.toString() + key.toString()
-				console.log(newKey)
-				console.log(this.state.outputscreen.toString())
-				console.log(key.toString())
-				this.setState({outputscreen:parseInt(newKey)})
-			}
-		}
+		console.log(key);
 	},
 	render: function() {
 		return (
@@ -76,7 +35,7 @@ var Calculator = React.createClass({displayName: "Calculator",
 						)
 					}, this)
 				), 
-				React.createElement("div", {className: "opkeys"}, 
+				React.createElement("div", null, 
 					this.state.opkeys.map(function(key){
 						return (
 							React.createElement(Opkey, {value: key, opKeyClick: this.opKeyClick})
@@ -101,7 +60,7 @@ var Numkey = React.createClass({displayName: "Numkey",
 
 var Opkey = React.createClass({displayName: "Opkey",
 	clickHandler: function(){
-		this.props.opKeyClick(this.props.value)
+		this.props.opkeyClick(this.props.value)
 	},
 	render: function() {
 		return (

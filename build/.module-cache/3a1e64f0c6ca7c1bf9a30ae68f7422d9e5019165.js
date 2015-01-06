@@ -16,23 +16,21 @@ var Calculator = React.createClass({displayName: "Calculator",
 				'='
 			],
 			outputscreen: 0,
-			lastoutput: 0,
 			currentoperator: '',
 		}
 	},
 	opKeyClick:function(key){
 		console.log(key)
 		if( key === 'C'){	
-			this.setState({outputscreen: 0, currentoperator:''})
+			this.setState({outputscreen: 0})
 		}
 		else {
 			this.setState({currentoperator:key})
 		}
 	},
 	keyClick: function(key){
-		// console.log(key);
+		console.log(key);
 		if(this.state.outputscreen !== 0 && this.state.currentoperator === '%'){
-			console.log("hi")
 			var output = this.state.outputscreen % key
 			this.setState({outputscreen:output})
 		}
@@ -44,24 +42,13 @@ var Calculator = React.createClass({displayName: "Calculator",
 			var output = this.state.outputscreen * key
 			this.setState({outputscreen:output})
 		}
-		else if(this.state.outputscreen !== 0 && this.state.currentoperator === '+'){
-			var output = this.state.outputscreen + parseInt(key)
-			this.setState({outputscreen:output})
-		}
-		else if(this.state.outputscreen !== 0 && this.state.currentoperator === '-'){
-			var output = this.state.outputscreen - key
-			this.setState({outputscreen:output})
-		}
 		else{
 			if(this.state.outputscreen === 0){
 				this.setState({outputscreen:key})
 			}
 			else {
-				var newKey = this.state.outputscreen.toString() + key.toString()
-				console.log(newKey)
-				console.log(this.state.outputscreen.toString())
-				console.log(key.toString())
-				this.setState({outputscreen:parseInt(newKey)})
+				var newKey = this.state.outputscreen + newKey
+				this.setState({outputscreen:newKey})
 			}
 		}
 	},

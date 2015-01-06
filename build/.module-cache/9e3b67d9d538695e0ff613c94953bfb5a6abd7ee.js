@@ -16,12 +16,11 @@ var Calculator = React.createClass({displayName: "Calculator",
 				'='
 			],
 			outputscreen: 0,
-			lastoutput: 0,
 			currentoperator: '',
 		}
 	},
 	opKeyClick:function(key){
-		console.log(key)
+		// console.log(key)
 		if( key === 'C'){	
 			this.setState({outputscreen: 0, currentoperator:''})
 		}
@@ -31,27 +30,27 @@ var Calculator = React.createClass({displayName: "Calculator",
 	},
 	keyClick: function(key){
 		// console.log(key);
-		if(this.state.outputscreen !== 0 && this.state.currentoperator === '%'){
+		if(this.state.outputscreen !== 0 && this.state.currentoperator !== ''){
 			console.log("hi")
-			var output = this.state.outputscreen % key
-			this.setState({outputscreen:output})
-		}
-		else if(this.state.outputscreen !== 0 && this.state.currentoperator === '/'){
-			var output = this.state.outputscreen / key
-			this.setState({outputscreen:output})
-		}
-		else if(this.state.outputscreen !== 0 && this.state.currentoperator === 'X'){
-			var output = this.state.outputscreen * key
-			this.setState({outputscreen:output})
-		}
-		else if(this.state.outputscreen !== 0 && this.state.currentoperator === '+'){
-			var output = this.state.outputscreen + parseInt(key)
-			this.setState({outputscreen:output})
-		}
-		else if(this.state.outputscreen !== 0 && this.state.currentoperator === '-'){
 			var output = this.state.outputscreen - key
 			this.setState({outputscreen:output})
 		}
+		// else if(this.state.outputscreen !== 0 && this.state.currentoperator === '/'){
+		// 	var output = this.state.outputscreen / key
+		// 	this.setState({outputscreen:output})
+		// }
+		// else if(this.state.outputscreen !== 0 && this.state.currentoperator === 'X'){
+		// 	var output = this.state.outputscreen * key
+		// 	this.setState({outputscreen:output})
+		// }
+		// else if(this.state.outputscreen !== 0 && this.state.currentoperator === '+'){
+		// 	var output = this.state.outputscreen + key
+		// 	this.setState({outputscreen:output})
+		// }
+		// else if(this.state.outputscreen !== 0 && this.state.currentoperator === '-'){
+		// 	var output = this.state.outputscreen - key
+		// 	this.setState({outputscreen:output})
+		// }
 		else{
 			if(this.state.outputscreen === 0){
 				this.setState({outputscreen:key})

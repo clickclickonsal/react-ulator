@@ -1,0 +1,29 @@
+#calculator {
+	height: 75vh;
+	width: 25vw;
+	border: 1px solid red;
+	background: grey;
+}
+
+.keys div {
+	height: 5em;
+	width: 6em;
+	border: 1px solid red;
+	float: left;
+	text-align: center;
+	background: white;
+}
+
+.output {
+	background: white;
+	text-align: right;
+	font-size: 4em;
+}
+
+.opkeys div {
+	height: 5em;
+	width: 6em;
+	background: white;
+	border: 1px solid red;
+	float: left;
+}

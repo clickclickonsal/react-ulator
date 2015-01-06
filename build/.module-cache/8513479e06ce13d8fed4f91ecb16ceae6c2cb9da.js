@@ -1,7 +1,7 @@
 /** 
 	* @jsx React.DOM
 */
-var Calculator = React.createClass({
+var Calculator = React.createClass({displayName: "Calculator",
 	getInitialState: function(){
 		return {
 			numkeys: [
@@ -16,23 +16,21 @@ var Calculator = React.createClass({
 				'='
 			],
 			outputscreen: 0,
-			lastoutput: 0,
 			currentoperator: '',
 		}
 	},
 	opKeyClick:function(key){
 		console.log(key)
 		if( key === 'C'){	
-			this.setState({outputscreen: 0, currentoperator:''})
+			this.setState({outputscreen: 0})
 		}
 		else {
 			this.setState({currentoperator:key})
 		}
 	},
 	keyClick: function(key){
-		// console.log(key);
+		console.log(key);
 		if(this.state.outputscreen !== 0 && this.state.currentoperator === '%'){
-			console.log("hi")
 			var output = this.state.outputscreen % key
 			this.setState({outputscreen:output})
 		}
@@ -45,11 +43,7 @@ var Calculator = React.createClass({
 			this.setState({outputscreen:output})
 		}
 		else if(this.state.outputscreen !== 0 && this.state.currentoperator === '+'){
-			var output = this.state.outputscreen + parseInt(key)
-			this.setState({outputscreen:output})
-		}
-		else if(this.state.outputscreen !== 0 && this.state.currentoperator === '-'){
-			var output = this.state.outputscreen - key
+			var output = this.state.outputscreen + key
 			this.setState({outputscreen:output})
 		}
 		else{
@@ -57,57 +51,54 @@ var Calculator = React.createClass({
 				this.setState({outputscreen:key})
 			}
 			else {
-				var newKey = this.state.outputscreen.toString() + key.toString()
-				console.log(newKey)
-				console.log(this.state.outputscreen.toString())
-				console.log(key.toString())
-				this.setState({outputscreen:parseInt(newKey)})
+				var newKey = this.state.outputscreen + key
+				this.setState({outputscreen:newKey})
 			}
 		}
 	},
 	render: function() {
 		return (
-			<div id="calculator">
-				<div className="output">{this.state.outputscreen}</div>
-				<div className="keys">
-					{this.state.numkeys.map(function(key){
+			React.createElement("div", {id: "calculator"}, 
+				React.createElement("div", {className: "output"}, this.state.outputscreen), 
+				React.createElement("div", {className: "keys"}, 
+					this.state.numkeys.map(function(key){
 						return (
-							<Numkey value={key} keyClick={this.keyClick} />
+							React.createElement(Numkey, {value: key, keyClick: this.keyClick})
 						)
-					}, this)}
-				</div>
-				<div className="opkeys">
-					{this.state.opkeys.map(function(key){
+					}, this)
+				), 
+				React.createElement("div", {className: "opkeys"}, 
+					this.state.opkeys.map(function(key){
 						return (
-							<Opkey value={key} opKeyClick={this.opKeyClick} />
+							React.createElement(Opkey, {value: key, opKeyClick: this.opKeyClick})
 						)
-					}, this)}
-				</div>
-			</div>
+					}, this)
+				)
+			)
 		);
 	}
 });
 
-var Numkey = React.createClass({
+var Numkey = React.createClass({displayName: "Numkey",
 	clickHandler: function(){
 		this.props.keyClick(this.props.value)
 	},
 	render: function() {
 		return (
-			<div className={this.props.value} onClick={this.clickHandler}>{this.props.value}</div>
+			React.createElement("div", {className: this.props.value, onClick: this.clickHandler}, this.props.value)
 		)
 	}
 });
 
-var Opkey = React.createClass({
+var Opkey = React.createClass({displayName: "Opkey",
 	clickHandler: function(){
 		this.props.opKeyClick(this.props.value)
 	},
 	render: function() {
 		return (
-			<div className={this.props.value} onClick={this.clickHandler}>{this.props.value}</div>
+			React.createElement("div", {className: this.props.value, onClick: this.clickHandler}, this.props.value)
 		)
 	}
 });
 
-React.render(< Calculator />, document.getElementById('calc-container'));
+React.render(React.createElement(Calculator, null), document.getElementById('calc-container'));
