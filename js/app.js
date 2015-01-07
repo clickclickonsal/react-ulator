@@ -26,7 +26,8 @@ var Calculator = React.createClass({
 			value += this.state.lastoutput % this.state.outputscreen
 		}
 		else if( this.state.currentoperator === '/' ){
-			value += parseFloat(this.state.lastoutput) / parseFloat(this.state.outputscreen)
+			quotient = parseFloat(this.state.lastoutput) / parseFloat(this.state.outputscreen)
+			value += quotient.toFixed(2);
 		}
 		else if( this.state.currentoperator === 'X' ){
 			value += parseFloat(this.state.lastoutput) * parseFloat(this.state.outputscreen)
