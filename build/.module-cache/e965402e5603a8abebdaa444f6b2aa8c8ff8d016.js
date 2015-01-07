@@ -21,22 +21,7 @@ var Calculator = React.createClass({displayName: "Calculator",
 		}
 	},
 	equalKeyClick: function(){
-		var value = 0;
-		if( this.state.currentoperator === '%' ){
-			value += this.state.lastoutput % this.state.outputscreen
-		}
-		else if( this.state.currentoperator === '/' ){
-			value += this.state.lastoutput / this.state.outputscreen
-		}
-		else if( this.state.currentoperator === 'X' ){
-			value += this.state.lastoutput * this.state.outputscreen
-		}
-		else if( this.state.currentoperator === '-' ){
-			value += this.state.lastoutput - this.state.outputscreen
-		}
-		else if( this.state.currentoperator === '+' ){
-			value += this.state.lastoutput + this.state.outputscreen
-		}
+		// var value = this.state.lastoutput this.state.opkeys this.state.outputscreen;
 		this.setState({lastoutput:value, outputscreen:0});
 
 	},
@@ -67,8 +52,7 @@ var Calculator = React.createClass({displayName: "Calculator",
 		return (
 			React.createElement("div", {id: "calculator"}, 
 
-				React.createElement("div", {className: "previous-output-screen"},  this.state.outputscreen === 0 ? '' : this.state.lastoutput), 
-				React.createElement("div", {className: "output-screen"},  this.state.outputscreen === 0 ? this.state.lastoutput : this.state.outputscreen), 
+				React.createElement("div", {className: "output-screen"}, "(", this.state.lastoutput, " || ", this.state.outputscreen, " )"), 
 
 				React.createElement("div", {className: "keys"}, 
 					this.state.numkeys.map(function(key){
@@ -86,7 +70,7 @@ var Calculator = React.createClass({displayName: "Calculator",
 					}, this)
 				), 
 
-				React.createElement("div", {className: "equal-key", onClick: this.equalKeyClick}, this.state.equalkey)
+				React.createElement("div", {className: "equal-key", onClick: this.equalKeyClick})
 
 			)
 		);

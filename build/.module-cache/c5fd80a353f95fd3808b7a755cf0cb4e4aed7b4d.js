@@ -14,7 +14,6 @@ var Calculator = React.createClass({displayName: "Calculator",
 				'C','%','/',
 				'X','-','+',
 			],
-			equalkey: '=',
 			outputscreen: 0,
 			lastoutput: 0,
 			currentoperator: '',
@@ -67,7 +66,6 @@ var Calculator = React.createClass({displayName: "Calculator",
 		return (
 			React.createElement("div", {id: "calculator"}, 
 
-				React.createElement("div", {className: "previous-output-screen"},  this.state.outputscreen === 0 ? '' : this.state.lastoutput), 
 				React.createElement("div", {className: "output-screen"},  this.state.outputscreen === 0 ? this.state.lastoutput : this.state.outputscreen), 
 
 				React.createElement("div", {className: "keys"}, 
@@ -86,7 +84,7 @@ var Calculator = React.createClass({displayName: "Calculator",
 					}, this)
 				), 
 
-				React.createElement("div", {className: "equal-key", onClick: this.equalKeyClick}, this.state.equalkey)
+				React.createElement("div", {className: "equal-key", onClick: this.equalKeyClick})
 
 			)
 		);

@@ -14,13 +14,13 @@
 	background: white;
 }
 
-.output {
+.output-screen, .previous-output-screen {
 	background: white;
 	text-align: right;
 	font-size: 4em;
 }
 
-.opkeys div {
+.op-keys div, .equal-key {
 	height: 5em;
 	width: 6em;
 	background: white;

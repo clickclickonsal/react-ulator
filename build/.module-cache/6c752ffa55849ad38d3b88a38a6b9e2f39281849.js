@@ -67,7 +67,6 @@ var Calculator = React.createClass({displayName: "Calculator",
 		return (
 			React.createElement("div", {id: "calculator"}, 
 
-				React.createElement("div", {className: "previous-output-screen"},  this.state.outputscreen === 0 ? '' : this.state.lastoutput), 
 				React.createElement("div", {className: "output-screen"},  this.state.outputscreen === 0 ? this.state.lastoutput : this.state.outputscreen), 
 
 				React.createElement("div", {className: "keys"}, 
