@@ -1,7 +1,7 @@
 /** 
 	* @jsx React.DOM
 */
-var Calculator = React.createClass({
+var Calculator = React.createClass({displayName: "Calculator",
 	getInitialState: function(){
 		return {
 			numkeys: [
@@ -26,13 +26,13 @@ var Calculator = React.createClass({
 			value += this.state.lastoutput % this.state.outputscreen
 		}
 		else if( this.state.currentoperator === '/' ){
-			value += parseFloat(this.state.lastoutput) / parseFloat(this.state.outputscreen)
+			value += this.state.lastoutput / this.state.outputscreen
 		}
 		else if( this.state.currentoperator === 'X' ){
-			value += parseFloat(this.state.lastoutput) * parseFloat(this.state.outputscreen)
+			value += this.state.lastoutput * this.state.outputscreen
 		}
 		else if( this.state.currentoperator === '-' ){
-			value += parseFloat(this.state.lastoutput) - parseFloat(this.state.outputscreen)
+			value += this.state.lastoutput - this.state.outputscreen
 		}
 		else if( this.state.currentoperator === '+' ){
 			value += parseFloat(this.state.lastoutput) + parseFloat(this.state.outputscreen)
@@ -54,7 +54,6 @@ var Calculator = React.createClass({
 			if(this.state.lastoutput === 0){
 				this.setState({lastoutput:key})
 			}
-			else if( this.state.outputscreen.length === 9 ) return;
 			else if(this.state.lastoutput !== 0 && this.state.currentoperator !== ''){
 				if(this.state.outputscreen === 0){
 					this.setState({outputscreen:key})
@@ -64,7 +63,6 @@ var Calculator = React.createClass({
 					this.setState({outputscreen:newKey})
 				}
 			}
-			else if(	this.state.lastoutput.length === 9 ) return;
 			else {
 				var newKey = (this.state.lastoutput.toString()) + (key.toString())
 				this.setState({lastoutput:newKey})
@@ -72,60 +70,60 @@ var Calculator = React.createClass({
 	},
 	render: function() {
 		return (
-			<div id="calculator">
+			React.createElement("div", {id: "calculator"}, 
 
-				<div className="output-screen">
-					<div className="previous-output-screen">
-						{ this.state.outputscreen === 0 ? '' : this.state.lastoutput }
-						<br/>
-						{ this.state.currentoperator}
-					</div>
-					<p>{ this.state.outputscreen === 0 ? this.state.lastoutput : this.state.outputscreen }</p>
-				</div>
+				React.createElement("div", {className: "output-screen"}, 
+					React.createElement("div", {className: "previous-output-screen"}, 
+						 this.state.outputscreen === 0 ? '' : this.state.lastoutput, 
+						React.createElement("br", null), 
+						 this.state.currentoperator
+					), 
+					 this.state.outputscreen === 0 ? this.state.lastoutput : this.state.outputscreen
+				), 
 
-				<div className="op-keys">
-					{this.state.opkeys.map(function(key){
+				React.createElement("div", {className: "op-keys"}, 
+					this.state.opkeys.map(function(key){
 						return (
-							<Opkey value={key} opKeyClick={this.opKeyClick} />
+							React.createElement(Opkey, {value: key, opKeyClick: this.opKeyClick})
 						)
-					}, this)}
-				</div>
+					}, this)
+				), 
 
-				<div className="num-keys">
-					{this.state.numkeys.map(function(key){
+				React.createElement("div", {className: "num-keys"}, 
+					this.state.numkeys.map(function(key){
 						return (
-							<Numkey value={key} keyClick={this.keyClick} />
+							React.createElement(Numkey, {value: key, keyClick: this.keyClick})
 						)
-					}, this)}
-				</div>
+					}, this)
+				), 
 
-				<div className="equal-key" onClick={this.equalKeyClick}><p>{this.state.equalkey}</p></div>
+				React.createElement("div", {className: "equal-key", onClick: this.equalKeyClick}, React.createElement("p", null, this.state.equalkey))
 
-			</div>
+			)
 		);
 	}
 });
 
-var Numkey = React.createClass({
+var Numkey = React.createClass({displayName: "Numkey",
 	clickHandler: function(){
 		this.props.keyClick(this.props.value)
 	},
 	render: function() {
 		return (
-			<div className={this.props.value} onClick={this.clickHandler}>{this.props.value}</div>
+			React.createElement("div", {className: this.props.value, onClick: this.clickHandler}, this.props.value)
 		)
 	}
 });
 
-var Opkey = React.createClass({
+var Opkey = React.createClass({displayName: "Opkey",
 	clickHandler: function(){
 		this.props.opKeyClick(this.props.value)
 	},
 	render: function() {
 		return (
-			<div className={this.props.value} onClick={this.clickHandler}>{this.props.value}</div>
+			React.createElement("div", {className: this.props.value, onClick: this.clickHandler}, this.props.value)
 		)
 	}
 });
 
-React.render(< Calculator />, document.getElementById('calc-container'));
+React.render(React.createElement(Calculator, null), document.getElementById('calc-container'));

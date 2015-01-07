@@ -26,16 +26,16 @@ var Calculator = React.createClass({displayName: "Calculator",
 			value += this.state.lastoutput % this.state.outputscreen
 		}
 		else if( this.state.currentoperator === '/' ){
-			value += parseFloat(this.state.lastoutput) / parseFloat(this.state.outputscreen)
+			value += this.state.lastoutput / this.state.outputscreen
 		}
 		else if( this.state.currentoperator === 'X' ){
-			value += parseFloat(this.state.lastoutput) * parseFloat(this.state.outputscreen)
+			value += this.state.lastoutput * this.state.outputscreen
 		}
 		else if( this.state.currentoperator === '-' ){
-			value += parseFloat(this.state.lastoutput) - parseFloat(this.state.outputscreen)
+			value += this.state.lastoutput - this.state.outputscreen
 		}
 		else if( this.state.currentoperator === '+' ){
-			value += parseFloat(this.state.lastoutput) + parseFloat(this.state.outputscreen)
+			value += this.state.lastoutput + this.state.outputscreen
 		}
 		this.setState({lastoutput:value, outputscreen:0});
 
@@ -54,17 +54,15 @@ var Calculator = React.createClass({displayName: "Calculator",
 			if(this.state.lastoutput === 0){
 				this.setState({lastoutput:key})
 			}
-			else if( this.state.outputscreen.length === 9 ) return;
 			else if(this.state.lastoutput !== 0 && this.state.currentoperator !== ''){
-				if(this.state.outputscreen === 0){
-					this.setState({outputscreen:key})
+				if(this.state.lastoutput === 0){
+					this.setState({lastoutput:key})
 				}
-				else {
+				else{
 					var newKey = (this.state.outputscreen.toString()) + (key.toString())
 					this.setState({outputscreen:newKey})
 				}
 			}
-			else if(	this.state.lastoutput.length === 9 ) return;
 			else {
 				var newKey = (this.state.lastoutput.toString()) + (key.toString())
 				this.setState({lastoutput:newKey})
@@ -80,7 +78,7 @@ var Calculator = React.createClass({displayName: "Calculator",
 						React.createElement("br", null), 
 						 this.state.currentoperator
 					), 
-					React.createElement("p", null,  this.state.outputscreen === 0 ? this.state.lastoutput : this.state.outputscreen)
+					 this.state.outputscreen === 0 ? this.state.lastoutput : this.state.outputscreen
 				), 
 
 				React.createElement("div", {className: "op-keys"}, 
