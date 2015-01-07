@@ -108,6 +108,7 @@ h1 {
 	background: -ms-linear-gradient(left, rgba(250,247,250,1) 5%, rgba(250,247,250,1) 6%, rgba(226,226,226,1) 85%, rgba(209,209,209,1) 99%, rgba(209,209,209,1) 100%);
 	background: linear-gradient(to right, rgba(250,247,250,1) 5%, rgba(250,247,250,1) 6%, rgba(226,226,226,1) 85%, rgba(209,209,209,1) 99%, rgba(209,209,209,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#faf7fa', endColorstr='#d1d1d1', GradientType=1 );
+	/*transition: 1s;*/
 }
 
 .num-keys div:nth-child(10) {
@@ -128,4 +129,7 @@ h1 {
 	margin-top: 1em;
 }
 
-
+.num-keys div:hover, .op-keys div:hover, .equal-key:hover {
+	border-bottom: 0;
+	margin-bottom: 0.3em;
+}
