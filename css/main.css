@@ -2,6 +2,13 @@
 	font-family: TransistFont; src: url('Transist.ttf');
 }
 
+h1 {
+	text-align: center;
+	font-size: 6em;
+	margin: 0;
+	font-family: 'TransistFont';
+}
+
 #calculator {
 	position: relative;
 	height: 41.5em;
