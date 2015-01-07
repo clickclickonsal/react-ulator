@@ -11,8 +11,8 @@ var Calculator = React.createClass({displayName: "Calculator",
 				'0','.'
 			],
 			opkeys: [
-				'X','/','%',
-				'C','+','-',
+				'X','divide','modulo',
+				'C','plus','subtract',
 			],
 			equalkey: '=',
 			outputscreen: 0,
@@ -22,19 +22,19 @@ var Calculator = React.createClass({displayName: "Calculator",
 	},
 	equalKeyClick: function(){
 		var value = 0;
-		if( this.state.currentoperator === '%' ){
+		if( this.state.currentoperator === 'modulo' ){
 			value += this.state.lastoutput % this.state.outputscreen
 		}
-		else if( this.state.currentoperator === '/' ){
+		else if( this.state.currentoperator === 'divide' ){
 			value += this.state.lastoutput / this.state.outputscreen
 		}
 		else if( this.state.currentoperator === 'X' ){
 			value += this.state.lastoutput * this.state.outputscreen
 		}
-		else if( this.state.currentoperator === '-' ){
+		else if( this.state.currentoperator === 'minus' ){
 			value += this.state.lastoutput - this.state.outputscreen
 		}
-		else if( this.state.currentoperator === '+' ){
+		else if( this.state.currentoperator === 'plus' ){
 			value += this.state.lastoutput + this.state.outputscreen
 		}
 		this.setState({lastoutput:value, outputscreen:0});
@@ -92,7 +92,7 @@ var Calculator = React.createClass({displayName: "Calculator",
 					}, this)
 				), 
 
-				React.createElement("div", {className: "equal-key", onClick: this.equalKeyClick}, React.createElement("p", null, this.state.equalkey))
+				React.createElement("div", {className: "equal-key", onClick: this.equalKeyClick}, this.state.equalkey)
 
 			)
 		);

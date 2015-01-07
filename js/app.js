@@ -11,8 +11,8 @@ var Calculator = React.createClass({
 				'0','.'
 			],
 			opkeys: [
-				'C','%','/',
-				'X','-','+',
+				'X','/','%',
+				'C','+','-',
 			],
 			equalkey: '=',
 			outputscreen: 0,
@@ -67,15 +67,13 @@ var Calculator = React.createClass({
 		return (
 			<div id="calculator">
 
-				<div className="previous-output-screen">{ this.state.outputscreen === 0 ? '' : this.state.lastoutput }</div>
-				<div className="output-screen">{ this.state.outputscreen === 0 ? this.state.lastoutput : this.state.outputscreen }</div>
-
-				<div className="keys">
-					{this.state.numkeys.map(function(key){
-						return (
-							<Numkey value={key} keyClick={this.keyClick} />
-						)
-					}, this)}
+				<div className="output-screen">
+					<div className="previous-output-screen">
+						{ this.state.outputscreen === 0 ? '' : this.state.lastoutput }
+						<br/>
+						{ this.state.currentoperator}
+					</div>
+					{ this.state.outputscreen === 0 ? this.state.lastoutput : this.state.outputscreen }
 				</div>
 
 				<div className="op-keys">
@@ -86,7 +84,15 @@ var Calculator = React.createClass({
 					}, this)}
 				</div>
 
-				<div className="equal-key" onClick={this.equalKeyClick}>{this.state.equalkey}</div>
+				<div className="num-keys">
+					{this.state.numkeys.map(function(key){
+						return (
+							<Numkey value={key} keyClick={this.keyClick} />
+						)
+					}, this)}
+				</div>
+
+				<div className="equal-key" onClick={this.equalKeyClick}><p>{this.state.equalkey}</p></div>
 
 			</div>
 		);
